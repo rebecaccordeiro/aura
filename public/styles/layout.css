@@ -1,3 +1,158 @@
+h1 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1.4rem;
+}
+
+h2 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.2rem;
+}
+
+h3 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1rem;
+}
+
 .login-form {
     margin-top: 50px;
+}
+
+#sideMenu {
+    /*background-color: rgb(245, 245, 245);*/
+    padding: 0rem 2rem 4rem;
+    position: relative;
+}
+
+nav ul {
+    margin-top: 1em;
+    text-decoration: none;
+    list-style-type: none;
+    font-size: 1.1rem;
+    color: #ccc;
+    line-height: 2.5rem;
+}
+
+nav ul a {
+    color: #666;
+    text-decoration: none;
+}
+
+#footer {
+    margin-top: 50px;
+}
+
+.logo {
+    text-align: center;
+}
+
+.bottom-align {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+a {
+    color: #666;
+}
+
+a:hover {
+    color: #ccc;
+}
+
+.profile {
+    margin: 3rem;
+
+}
+
+.div-profile-pic {
+    width: 100px;
+    position: static;
+    display: inline-block;
+    margin-right: 1.2rem;
+}
+
+.div-profile-text {
+    width: 200px;
+    position: static;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.notifications {
+    margin: 3rem;
+}
+
+.div-notification-pic {
+    width: 40px;
+    display: inline-block;
+    margin-right: 0.6rem;
+}
+
+.div-notification-text {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.div-profile-jobs {
+    margin: 1.8rem 0 1rem;
+}
+
+.div-profile-stamps {
+    margin: 1.8rem 0 1rem;
+}
+
+.feed {
+    margin: 3rem;
+}
+
+.board {
+    margin: 3rem;
+}
+
+.jobs {
+    margin-top: 50px;
+}
+
+.job-card {
+    margin-bottom: 20px;
+}
+
+.individual-post {
+    margin-bottom: 3rem;
+}
+
+.post-header-container {
+    display: flex; 
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.post-profile-image {
+    width: 40px;
+    height: auto;
+}
+
+.post-header-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.post-name-text, .post-time-text {
+    margin: 0;
+}
+
+.post-comment {
+    margin-top: 1rem;
+}
+
+.comment-button {
+    margin-top: 10px;
 }

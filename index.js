@@ -36,20 +36,32 @@ app.post("/login", (req, res) => {
     }
 });
 
-app.get("/fazerobem", (req, res) => {
-    res.sendFile(__dirname + "/public/fazerobem.html");
+app.get("/register", (req, res) => {
+    res.render("register.ejs");
+})
+
+app.post("/register", (req, res) => {
+    console.log(req.body);
+})
+
+app.get("/board", (req, res) => {
+    res.render("board.ejs");
 });
 
 app.get("/home", (req, res) => {
     res.render("index.ejs");
 });
 
-app.get("/notificacoes", (resq, res) => {
-    res.sendFile(__dirname + "/public/notificacoes.html");
+app.get("/notifications", (resq, res) => {
+    res.render("notifications.ejs");
 });
 
-app.get("/perfil", (resq, res) => {
-    res.render("perfil.ejs");
+app.get("/profile", (resq, res) => {
+    res.render("profile.ejs");
+});
+
+app.get("/configurations", (resq, res) => {
+    res.render("configurations.ejs");
 });
 
 app.listen(port, () => {
