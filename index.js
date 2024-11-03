@@ -1,18 +1,36 @@
 import express from "express";
+import { engine as exphbs } from "express-handlebars";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import { dirname} from "path";
 import { fileURLToPath } from "url";
+import sequelize from './db/conn.js';
+import User from './models/User.js';
+import userRoutes from './routes/userRoutes.js';
+
 
 const app = express();
 const port = 3000;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+sequelize.sync()
+    .then(() => {
+        app.listen(port, () => {
+            console.log(`Server running on port ${port}.`);
+        });
+    })
+    .catch(error => console.error('Erro ao sincronizar modelos:', error));
+
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
+
 var userIsValid = false;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("combined"));
+app.use(express.json())
 app.use(express.static("public"));
+app.use('/users', userRoutes);
 
 function passwordCheck(req, res, next) {
     const passwordTest = req.body["passwordInput"];
@@ -62,8 +80,4 @@ app.get("/profile", (resq, res) => {
 
 app.get("/configurations", (resq, res) => {
     res.render("configurations.ejs");
-});
-
-app.listen(port, () => {
-    console.log(`Server running on port ${port}.`);
 });
