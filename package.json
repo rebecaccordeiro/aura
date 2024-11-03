@@ -11,14 +11,21 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.7",
+    "cookie-session": "^2.1.0",
     "ejs": "^3.1.9",
     "express": "^4.18.3",
+    "express-flash": "^0.0.2",
     "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.1",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.11.3",
     "nodemon": "^3.1.7",
-    "sequelize": "^6.37.5"
+    "sequelize": "^6.37.5",
+    "session-file-store": "^1.5.0"
   }
 }

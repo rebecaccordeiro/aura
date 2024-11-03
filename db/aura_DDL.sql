@@ -31,6 +31,7 @@ CREATE TABLE Job (
     AddressComplement varchar(55),
     ZipCode int,
     Vacancies int,
+    Active boolean,
     Description varchar(1000),
     FOREIGN KEY (NgoId) REFERENCES Ngo(NgoId)
     );

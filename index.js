@@ -5,9 +5,13 @@ import morgan from "morgan";
 import { dirname} from "path";
 import { fileURLToPath } from "url";
 import sequelize from './db/conn.js';
+
 import User from './models/User.js';
 import userRoutes from './routes/userRoutes.js';
-
+import Ngo from './models/Ngo.js';
+import ngoRoutes from './routes/ngoRoutes.js';
+import Job from './models/Job.js';
+import jobRoutes from './routes/jobRoutes.js';
 
 const app = express();
 const port = 3000;
@@ -31,6 +35,8 @@ app.use(morgan("combined"));
 app.use(express.json())
 app.use(express.static("public"));
 app.use('/users', userRoutes);
+app.use('/ngos', ngoRoutes);
+app.use('/ngos', jobRoutes);
 
 function passwordCheck(req, res, next) {
     const passwordTest = req.body["passwordInput"];
