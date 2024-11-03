@@ -59,5 +59,6 @@ const Job = sequelize.define('Job', {
 });
 
 Job.belongsTo(Ngo, { foreignKey: 'NgoId' });
+Ngo.hasMany(Job);
 
 export default Job;

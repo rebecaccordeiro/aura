@@ -1,21 +1,34 @@
 import express from "express";
 import { engine as exphbs } from "express-handlebars";
+import session from "express-session";
+import FileStoreConstructor from 'session-file-store';
 import bodyParser from "body-parser";
 import morgan from "morgan";
-import { dirname} from "path";
+import { dirname } from "path";
+import path from "path";
 import { fileURLToPath } from "url";
 import sequelize from './db/conn.js';
+import os from "os";
+import flash from "express-flash";
 
+// Models
 import User from './models/User.js';
-import userRoutes from './routes/userRoutes.js';
 import Ngo from './models/Ngo.js';
-import ngoRoutes from './routes/ngoRoutes.js';
 import Job from './models/Job.js';
+
+// Import Routes
+import userRoutes from './routes/userRoutes.js';
+import ngoRoutes from './routes/ngoRoutes.js';
 import jobRoutes from './routes/jobRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+
+// Import Controllers
+import JobController from "./controllers/JobController.js";
 
 const app = express();
 const port = 3000;
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const FileStore = FileStoreConstructor(session);
 
 sequelize.sync()
     .then(() => {
@@ -30,13 +43,43 @@ app.set('view engine', 'handlebars');
 
 var userIsValid = false;
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan("combined"));
 app.use(express.json())
 app.use(express.static("public"));
+
+app.use(session({
+    name: "session",
+    secret: 'mySecretKey',
+    resave: false,
+    saveUninitialized: false,
+    store: new FileStore({
+      logFn: () => {},
+      path: path.join(os.tmpdir(), 'session'),
+    }),
+    cookie: { 
+      secure: false, 
+      maxAge: 360000, 
+      expires: new Date(Date.now() + 360000), 
+      httpOnly: true 
+    }
+  }));
+
+app.use(flash());
+
+app.use((req, res, next) => {
+    if(req.session.userid) {
+        res.locals.session = req.session
+    }
+    next()
+})
+
+// Routes
 app.use('/users', userRoutes);
 app.use('/ngos', ngoRoutes);
-app.use('/ngos', jobRoutes);
+app.use('/jobs', jobRoutes);
+app.use('/2', authRoutes);
+//app.get('/', JobController.showJobs);
 
 function passwordCheck(req, res, next) {
     const passwordTest = req.body["passwordInput"];

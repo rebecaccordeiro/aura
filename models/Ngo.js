@@ -45,7 +45,11 @@ const Ngo = sequelize.define('Ngo', {
     PhoneNumber: {
         type: DataTypes.STRING(20),
         allowNull: true,
-    }
+    },
+    Password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
 }, {
     tableName: 'Ngo',
     timestamps: true,

@@ -33,6 +33,10 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING(20),
         allowNull: true,
     },
+    Password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
 }, {
     tableName: 'User',
     timestamps: true,
