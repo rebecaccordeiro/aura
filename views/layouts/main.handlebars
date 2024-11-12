@@ -15,11 +15,43 @@
 
 </head>
 <body>
-    <!-- Menu após autenticação-->
+    <div class="row">
+    <div class="col-lg-3" id="sideMenu">
+        <div class="logo"><img src="/images/aura-logo.png"></div>
+        <nav class="navbarText">
+            <ul>
+
 
     <!-- URLs após autenticação -->
+    {{#if session.userid}}
+                <li><a href=""><i class="bi bi-search"></i> Pesquisar</a></li>
+                <li><a href="/home"><i class="bi bi-house"></i> Home</a></li>
+                <li><a href="/board"><i class="bi bi-clipboard-heart"></i> Fazer o Bem</a></li>
+                <li><a href="/notifications"><i class="bi bi-bell"></i> Notificações</a></li>
+                <li><a href="/profile"><i class="bi bi-person-circle"></i> Perfil</a></li>
+                <li><a href="/logout"><i class="bi bi-search"></i> Sair</a></li>
+    {{else}}
+    <!-- URLs pré autenticação-->
+                <li><a href="/login"><i class="bi bi-search"></i> Entrar</a></li>
+                <li><a href="/register"><i class="bi bi-search"></i> Cadastrar-se</a></li>
+                <li><a href="/registerngo"><i class="bi bi-search"></i> Cadastrar ONG</a></li>
+    {{/if}}
+            </ul>
+        </nav>
+    
+        <div style='text-align:right'>
+            <p class="bottom-align"><a href=""><i class="bi bi-gear"></i> Configurações</a></p>
+        </div>
+    </div>
+    
+    <div class="col-sm-12 col-lg-9">
 
     <!-- Mensagens -->
+    {{#if message}}
+        <div class="message">
+            {{message}}
+        </div>
+    {{/if}}
     {{{body}}}
 
     <div class="container" id="footer">

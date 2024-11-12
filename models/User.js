@@ -2,38 +2,42 @@ import { Sequelize, DataTypes } from 'sequelize';
 import sequelize from '../db/conn.js';
 
 const User = sequelize.define('User', {
-    UserId: {
+    id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
     },
-    FirstName: {
+    fname: {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
-    LastName: {
+    lname: {
         type: DataTypes.STRING(255),
         allowNull: true,
     },
-    Email: {
+    email: {
         type: DataTypes.STRING(255),
         allowNull: false,
         unique: true,
     },
-    Birthday: {
+    birthday: {
         type: DataTypes.DATE,
         allowNull: true,
     },
-    City: {
+    city: {
         type: DataTypes.STRING(255),
         allowNull: true,
     },
-    PhoneNumber: {
+    state: {
+        type: DataTypes.STRING(255),
+        allowNull: true,
+    },
+    phonenumber: {
         type: DataTypes.STRING(20),
         allowNull: true,
     },
-    Password: {
+    password: {
         type: DataTypes.STRING,
         allowNull: false,
     },

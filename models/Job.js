@@ -3,53 +3,53 @@ import sequelize from '../db/conn.js';
 import Ngo from './Ngo.js';
 
 const Job = sequelize.define('Job', {
-    JobId: {
+    id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
     },
-    NgoId: {
+    ngoid: { 
         type: DataTypes.INTEGER,
         references: {
             model: Ngo,
-            key: 'NgoId'
+            key: 'id'
         },
         allowNull: false,
     },
-    Title: {
+    title: {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
-    Remote: {
+    remote: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
     },
-    AddressStreet: {
+    addressstreet: {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
-    AddressNumber: {
+    addressnumber: {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
-    AddressComplement: {
+    addresscomplement: {
         type: DataTypes.STRING(55),
         allowNull: true,
     },
-    ZipCode: {
+    zipcode: {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
-    Vacancies: {
+    vacancies: {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
-    Description: {
+    description: {
         type: DataTypes.STRING(1000),
         allowNull: true,
     },
-    Active: {
+    active: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
     },
@@ -58,7 +58,7 @@ const Job = sequelize.define('Job', {
     timestamps: true,
 });
 
-Job.belongsTo(Ngo, { foreignKey: 'NgoId' });
-Ngo.hasMany(Job);
+Job.belongsTo(Ngo, { foreignKey: 'ngoid' });
+Ngo.hasMany(Job, { foreignKey: 'ngoid' });
 
 export default Job;

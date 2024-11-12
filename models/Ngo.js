@@ -2,51 +2,55 @@ import { Sequelize, DataTypes } from 'sequelize';
 import sequelize from '../db/conn.js';
 
 const Ngo = sequelize.define('Ngo', {
-    NgoId: {
+    id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false,
     },
-    Name: {
+    name: {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
-    Cnpj: {
+    cnpj: {
         type: DataTypes.STRING(20),
         allowNull: false,
         unique: true,
     },
-    Email: {
+    email: {
         type: DataTypes.STRING(255),
         allowNull: false,
         unique: true,
     },
-    AddressStreet: {
+    addressstreet: {
         type: DataTypes.STRING(255),
         allowNull: true,
     },
-    AddressNumber: {
+    addressnumber: {
         type: DataTypes.INTEGER,
         allowNull: true,
     },
-    AddressComplement: {
+    addresscomplement: {
         type: DataTypes.STRING(55),
         allowNull: true,
     },
-    ZipCode: {
+    zipcode: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    City: {
+    city: {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
-    PhoneNumber: {
+    state: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+    },
+    phonenumber: {
         type: DataTypes.STRING(20),
         allowNull: true,
     },
-    Password: {
+    password: {
         type: DataTypes.STRING,
         allowNull: false,
     },

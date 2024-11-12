@@ -1,53 +1,63 @@
-    <div class="container login-form col-lg-8">
-        <form action="/register" method="POST">
+    <div class="container login-form col-lg-4">
+        <form action="/registerngo" method="POST">
         {{!-- <div class="logo">
             <img class="mb-4" src="/images/aura-logo.png" alt="" width="150px">
         </div> --}}
-            <h1 class="h3 fw-normal">Fazer cadastro</h1>
+            <h1 class="h3 mb-3 fw-normal">Cadastrar ONG</h1>
             <div class="form-row">
                 <div class="form-group">
-              <label for="fname">Nome</label>
-              <input type="text" class="form-control" name="fname" placeholder="Nome" required>
+              <label for="name">Nome da ONG</label>
+              <input type="text" class="form-control" name="name" placeholder="Nome da ONG" required>
             </div>
             <br/>
-            <div class="form-group">
-              <label for="lname">Sobrenome</label>
-              <input type="text" class="form-control" name="lname" placeholder="Sobrenome" required>
+            <div class="form-group col-md-6">
+              <label for="cnpj">CNPJ</label>
+              <input type="text" class="form-control" name="cnpj" placeholder="CNPJ" required>
             </div>
             <br/>
-              <div class="form-group">
+              <div class="form-group col-md-6">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" name="email" placeholder="Email" required>
               </div>
               <br/>
-              <div class="form-group">
+              <div class="form-group col-md-6">
                 <label for="password">Senha</label>
                 <input type="password" class="form-control" name="password" placeholder="*****" required>
               </div>
               <br/>
-              <div class="form-group">
+              <div class="form-group col-md-6">
                 <label for="confirmpassword">Confirme sua Senha</label>
                 <input type="password" class="form-control" name="confirmpassword" placeholder="*****" required>
               </div>
             </div>
             <br/>
-            {{!-- <div class="form-group">
-              <label for="address">Endereço</label>
-              <input type="text" class="form-control" name="address" placeholder="Rua/Avenida e número" required>
+            <div class="form-group">
+              <label for="addressstreet">Rua/Avenida</label>
+              <input type="text" class="form-control" name="addressstreet" placeholder="Rua/Avenida" required>
             </div>
             <br/>
             <div class="form-group">
-              <label for="address2">Complemento</label>
+              <label for="addressnumber">Número</label>
+              <input type="text" class="form-control" name="addressnumber" placeholder="Número" required>
+            </div>
+            <br/>
+            <div class="form-group">
+              <label for="addresscomplement">Complemento</label>
               <input type="text" class="form-control" name="address2" placeholder="Apartamento, bloco" required>
             </div>
-            <br/> --}}
+            <br/>
+            <div class="form-group">
+              <label for="zipcode">CEP</label>
+              <input type="text" class="form-control" name="zipcode" placeholder="CEP" required>
+            </div>
+            <br/>
             <div class="form-row">
-              <div class="form-group">
+              <div class="form-group col-md-6">
                 <label for="city">Cidade</label>
-                <input type="text" class="form-control" name="city" required>
+                <input type="text" class="form-control" name="city" placeholder="Cidade" required>
               </div>
               <br/>
-              <div class="form-group">
+              <div class="form-group col-md-4">
                 <label for="state">Estado</label>
                 <select name="state" class="form-control" required>
                   <option selected>Escolha...</option>
@@ -81,14 +91,9 @@
                 </select>
               </div>
               <br/>
-              <div class="form-group">
-                <label for="birthday">Aniversário</label>
-                <input type="text" class="form-control" name="birthday" required>
-              </div>
-              <br/>
-              <div class="form-group">
+              <div class="form-group col-md-4">
                 <label for="phonenumber">Número de telefone</label>
-                <input type="text" class="form-control" name="phonenumber" required>
+                <input type="text" class="form-control" id="phonenumber" required>
               </div>
               <br/>
             </div>
@@ -101,8 +106,6 @@
               </div>
             </div>
             <br> --}}
-            <div class="form-group">
             <center><button type="submit" class="btn btn-secondary">Fazer cadastro</button></center>
-            </div>
           </form>
     </div>

@@ -65,9 +65,19 @@ a:hover {
     color: #ccc;
 }
 
+.message {
+    padding: 1em;
+    color: #ff0000;
+    background-color: #ccc;
+    border: 1px solid #b8daff;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 auto 2em;
+    max-width: 60%;
+}
+
 .profile {
     margin: 3rem;
-
 }
 
 .div-profile-pic {

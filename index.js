@@ -31,6 +31,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const FileStore = FileStoreConstructor(session);
 
 sequelize.sync()
+// .sync({ force: true })
     .then(() => {
         app.listen(port, () => {
             console.log(`Server running on port ${port}.`);
@@ -69,7 +70,8 @@ app.use(flash());
 
 app.use((req, res, next) => {
     if(req.session.userid) {
-        res.locals.session = req.session
+        res.locals.session = req.session;
+        res.locals.message = req.flash('message');
     }
     next()
 })
@@ -78,55 +80,67 @@ app.use((req, res, next) => {
 app.use('/users', userRoutes);
 app.use('/ngos', ngoRoutes);
 app.use('/jobs', jobRoutes);
-app.use('/2', authRoutes);
-//app.get('/', JobController.showJobs);
+app.use('/', authRoutes);
 
-function passwordCheck(req, res, next) {
-    const passwordTest = req.body["passwordInput"];
-    if (passwordTest === "SENHA") {
-        userIsValid = true;
+
+const forceSyncDatabase = async () => {
+    try {
+      await sequelize.sync({ force: true }); // Sincronização forçada
+      console.log("As tabelas foram recriadas com sucesso.");
+    } catch (error) {
+      console.error("Erro ao sincronizar o banco de dados:", error);
     }
-    next();
-}
-app.use(passwordCheck);
+  };
+  
+  // Inicializa a sincronização forçada
+//   forceSyncDatabase();
 
-app.get("/", (req, res) => {
-    res.render("login.ejs");
-});
+// function passwordCheck(req, res, next) {
+//     const passwordTest = req.body["passwordInput"];
+//     if (passwordTest === "SENHA") {
+//         userIsValid = true;
+//     }
+//     next();
+// }
+// app.use(passwordCheck);
 
-app.post("/login", (req, res) => {
-    console.log(req.body);
-    if(userIsValid) {
-        res.render("index.ejs");
-    } else {
-        res.render("login.ejs");
-    }
-});
+// app.get("/", (req, res) => {
+//     res.render("login.ejs");
+// });
 
-app.get("/register", (req, res) => {
-    res.render("register.ejs");
-})
+// app.post("/login", (req, res) => {
+//     console.log(req.body);
+//     if(userIsValid) {
+//         res.render("index.ejs");
+//     } else {
+//         res.render("login.ejs");
+//     }
+// });
 
-app.post("/register", (req, res) => {
-    console.log(req.body);
-})
+// app.get("/register", (req, res) => {
+//     res.render("register.ejs");
+// })
 
-app.get("/board", (req, res) => {
-    res.render("board.ejs");
-});
+// app.post("/register", (req, res) => {
+//     console.log(req.body);
+// })
 
-app.get("/home", (req, res) => {
-    res.render("index.ejs");
-});
+// app.get("/board", (req, res) => {
+//     res.render("board.ejs");
+// });
 
-app.get("/notifications", (resq, res) => {
-    res.render("notifications.ejs");
-});
+// app.get("/home", (req, res) => {
+//     res.render("index.ejs");
+// });
 
-app.get("/profile", (resq, res) => {
-    res.render("profile.ejs");
-});
+// app.get("/notifications", (resq, res) => {
+//     res.render("notifications.ejs");
+// });
 
-app.get("/configurations", (resq, res) => {
-    res.render("configurations.ejs");
-});
+// app.get("/profile", (resq, res) => {
+//     res.render("profile.ejs");
+// });
+
+// app.get("/configurations", (resq, res) => {
+//     res.render("configurations.ejs");
+// });
