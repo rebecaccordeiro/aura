@@ -67,9 +67,8 @@ a:hover {
 
 .message {
     padding: 1em;
-    color: #ff0000;
-    background-color: #ccc;
-    border: 1px solid #b8daff;
+    color: #b30000;
+    background-color: #ebebeb;
     border-radius: 5px;
     text-align: center;
     margin: 0 auto 2em;

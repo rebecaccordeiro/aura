@@ -31,7 +31,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const FileStore = FileStoreConstructor(session);
 
 sequelize.sync()
-// .sync({ force: true })
+// sequelize.sync({ force: true })
     .then(() => {
         app.listen(port, () => {
             console.log(`Server running on port ${port}.`);
@@ -69,12 +69,11 @@ app.use(session({
 app.use(flash());
 
 app.use((req, res, next) => {
-    if(req.session.userid) {
+    if (req.session.userid || req.session.ngoid) {
         res.locals.session = req.session;
-        res.locals.message = req.flash('message');
     }
-    next()
-})
+    next();
+});
 
 // Routes
 app.use('/users', userRoutes);
@@ -91,6 +90,10 @@ const forceSyncDatabase = async () => {
       console.error("Erro ao sincronizar o banco de dados:", error);
     }
   };
+
+app.get('/', (req, res) => {
+    res.render('home'); // substitua 'home' pelo nome da sua página inicial
+});
   
   // Inicializa a sincronização forçada
 //   forceSyncDatabase();

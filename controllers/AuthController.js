@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import Ngo from '../models/Ngo.js';
 
 import bcrypt from "bcryptjs";
 
@@ -8,38 +9,45 @@ export default class AuthController {
     }
 
     static async loginPost(req, res) {
-        const {email, password} = req.body
-        // find user
-        const user = await User.findOne({where: {email: email}})
-        // const ngo = await Ngo.findOne({where: {email: email}})
-        if(!user) /* & if(!ngo) */ {
-            // message
-            req.flash('message', 'Usuário não encontrado.')
-            res.render('auth/login')
-
-            return
+        const {email, password} = req.body;
+    
+        // Procurar usuário na tabela User
+        let user = await User.findOne({ where: { email } });
+        let userType = 'user';
+    
+        // Se não encontrado, procurar na tabela Ngo
+        if (!user) {
+            user = await Ngo.findOne({ where: { email } });
+            userType = 'ngo';
         }
-
-        // check if passwords match
-        const passwordMatch = bcrypt.compareSync(password, user.password) /* || ngo.password */ 
-
-        if(!passwordMatch) {
-            // message
-            req.flash('message', 'Senha inválida.')
-            res.render('auth/login')
-
-            return
+    
+        // Se nenhum usuário for encontrado
+        if (!user) {
+            req.flash('message', 'Usuário não encontrado.');
+            res.render('auth/login');
+            return;
         }
-
-        // initialize session
-        req.session.userid = user.id
-        // req.session.ngoid = ngo.id
-
-        req.flash('message', 'Autenticação realizada com sucesso!')
-
+    
+        // Checar se a senha é válida
+        const passwordMatch = bcrypt.compareSync(password, user.password);
+    
+        if (!passwordMatch) {
+            req.flash('message', 'Senha inválida.');
+            res.render('auth/login');
+            return;
+        }
+    
+        // Inicializar sessão com base no tipo de usuário
+        if (userType === 'user') {
+            req.session.userid = user.id;
+        } else if (userType === 'ngo') {
+            req.session.ngoid = user.id;
+        }
+    
+        req.flash('message', 'Autenticação realizada com sucesso!');
         req.session.save(() => {
-            res.redirect('/')
-        })
+            res.redirect('/');
+        });
     }
 
     static register(req, res) {
@@ -73,9 +81,14 @@ export default class AuthController {
         const hashedPassword = bcrypt.hashSync(password, salt)
 
         const user = {
-            name,
+            fname,
+            lname,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            city,
+            state,
+            birthday,
+            phonenumber
         }
 
         try {
@@ -89,12 +102,69 @@ export default class AuthController {
             req.session.save(() => {
                 res.redirect('/')
             })
-            res.redirect('/');
         } catch(err) {
+            console.log(err)
+        }
+    }
 
+    static registerngo(req, res) {
+        res.render('auth/registerngo')
+    }
+
+    static async registerngoPost(req, res) {
+        const { name, cnpj, email, password, confirmpassword, city, state, addressstreet, addressnumber, addresscomplement, zipcode, phonenumber } = req.body
+
+        // password match validation
+        if(password != confirmpassword) {
+            // message
+            req.flash('message', 'As senhas não conferem, tente novamente.')
+            res.render('auth/register')
+
+            return
         }
 
-        await User.create(user)
+        // check if ngo exists
+        const checkIfNgoExists = await Ngo.findOne({where: {email: email}})
+
+        if(checkIfNgoExists) {
+            req.flash('message', 'O e-mail já está em uso.')
+            res.render('auth/register')
+
+            return
+        }
+
+        // create a password
+        const salt = bcrypt.genSaltSync(10)
+        const hashedPassword = bcrypt.hashSync(password, salt)
+
+        const ngo = {
+            name,
+            cnpj,
+            email,
+            password: hashedPassword,
+            city,
+            state,
+            addressstreet,
+            addressnumber,
+            addresscomplement,
+            zipcode,
+            phonenumber
+        }
+
+        try {
+            const createdNgo = await Ngo.create(ngo)
+
+            // initialize session
+            req.session.ngoid = createdNgo.id
+
+            req.flash('message', 'Cadastro realizado com sucesso!')
+
+            req.session.save(() => {
+                res.redirect('/')
+            })
+        } catch(err) {
+            console.log(err)
+        }
     }
 
     static logout(req, res) {

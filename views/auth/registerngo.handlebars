@@ -1,11 +1,11 @@
-    <div class="container login-form col-lg-4">
+    <div class="container login-form col-lg-8">
         <form action="/registerngo" method="POST">
         {{!-- <div class="logo">
             <img class="mb-4" src="/images/aura-logo.png" alt="" width="150px">
         </div> --}}
             <h1 class="h3 mb-3 fw-normal">Cadastrar ONG</h1>
             <div class="form-row">
-                <div class="form-group">
+                <div class="form-group col-md-6">
               <label for="name">Nome da ONG</label>
               <input type="text" class="form-control" name="name" placeholder="Nome da ONG" required>
             </div>
@@ -93,7 +93,7 @@
               <br/>
               <div class="form-group col-md-4">
                 <label for="phonenumber">Número de telefone</label>
-                <input type="text" class="form-control" id="phonenumber" required>
+                <input type="text" class="form-control" name="phonenumber" required>
               </div>
               <br/>
             </div>
