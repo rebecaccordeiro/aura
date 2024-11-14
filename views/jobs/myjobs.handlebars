@@ -1,0 +1,169 @@
+<div class="board">
+                <h1>Publique um novo Trabalho Voluntário</h1>
+
+                <form class="row g-3" action="/jobs/myjobs" method="POST">
+                    <div>
+                        <label for="title" class="form-label visually-hidden">Título</label>
+                        <input type="text" class="form-control" name="title" placeholder="Título do trabalho" required>
+                    </div>
+
+                    <div>
+                        <label for="description" class="form-label visually-hidden">Descrição</label>
+                        <textarea class="form-control" name="description" rows="5" placeholder="Descreva os detalhes do trabalho voluntário." required></textarea>
+                    </div>
+
+                    <div>
+                        <label for="vacancies" class="form-label visually-hidden">Quantidade de Vagas</label>
+                        <input type="text" class="form-control" name="vacancies" placeholder="Quantidade de Vagas" required>
+                    </div>
+
+                    <div>
+                    <input class="form-check-input" type="checkbox" id="remoteWork" name="remote" onclick="toggleAddressFields()">
+                    <label class="form-check-label" for="remote">Trabalho Remoto</label>
+                    </div>
+
+                    <!-- address fields -->
+                    <div id="addressFields" class="row g-3">
+                        <div class="col-6">
+                            <label for="addressstreet" class="form-label visually-hidden">Rua/Avenida</label>
+                            <input type="text" class="form-control" name="addressstreet" placeholder="Rua/Avenida">
+                        </div>
+                        <div class="col-3">
+                            <label for="addressnumber" class="form-label visually-hidden">Número</label>
+                            <input type="text" class="form-control" name="addressnumber" placeholder="Número">
+                        </div>
+                        <div class="col-3">
+                            <label for="addresscomplement" class="form-label visually-hidden">Complemento</label>
+                            <input type="text" class="form-control" name="addresscomplement" placeholder="Complemento">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="city" class="form-label visually-hidden">Cidade</label>
+                            <input type="text" class="form-control" name="city" placeholder="Cidade">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="state" class="visually-hidden">Estado</label>
+                            <select name="state" class="form-control">
+                            <option selected>Estado</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="zipcode" class="form-label visually-hidden">Zip</label>
+                            <input type="text" class="form-control" name="zipcode" placeholder="CEP">
+                        </div>
+                    </div>
+
+                    <!-- send file -->
+                    <div class="mb-3 d-flex align-items-center">
+                        <label for="postFile" class="btn btn-outline-secondary btn-icon me-2 mb-0">
+                            <i class="bi bi-paperclip"></i>
+                            <input type="file" name="postFile" class="d-none">
+                        </label>
+
+                        <button type="submit" class="btn btn-secondary">Publicar</button>
+                    </div>
+                </form>
+                
+                  <!--JOBS-->
+                  <div class="jobs">
+                  <h1>Meus Trabalhos Voluntários</h1>
+
+                  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                    <div class="col">
+                        <div class="card">
+                    <img src="../images/job-img-example.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Título do Trabalho</h5>
+                      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
+                      <a href="#" class="btn btn-secondary">Ver mais</a>
+                    </div>
+                        </div>
+                  </div>
+
+                  <div class="col">
+                  <div class="card">
+                    <img src="../images/job-img-example.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Título do Trabalho</h5>
+                      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
+                      <a href="#" class="btn btn-secondary">Ver mais</a>
+                    </div>
+                  </div>
+                  </div>
+
+
+                  <div class="col">
+                    <div class="card">
+                      <img src="../images/job-img-example.jpeg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Título do Trabalho</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
+                        <a href="#" class="btn btn-secondary">Ver mais</a>
+                      </div>
+                    </div>
+                  </div>
+
+
+                    <div class="col">
+                    <div class="card">
+                      <img src="images/job-img-example.jpeg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Título do Trabalho</h5>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
+                        <a href="#" class="btn btn-secondary">Ver mais</a>
+                      </div>
+                    </div>
+                    </div>
+
+
+                    <div class="col">
+                      <div class="card">
+                        <img src="images/job-img-example.jpeg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title">Título do Trabalho</h5>
+                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
+                          <a href="#" class="btn btn-secondary">Ver mais</a>
+                        </div>
+                      </div>
+                    </div>
+
+            </div>
+
+            <script>
+    function toggleAddressFields() {
+    const isRemote = document.getElementById('remoteWork').checked;
+    const addressFields = document.getElementById('addressFields');
+    
+    if (isRemote) {
+        addressFields.style.display = 'none';
+    } else {
+        addressFields.style.display = 'flex';
+    }
+    }
+</script>

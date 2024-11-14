@@ -24,23 +24,23 @@
 
     {{#if session.userid}}
         <!-- Menu para usuário autenticado -->
-        <li><a href="/home"><i class="bi bi-house"></i> Home</a></li>
-        <li><a href="/board"><i class="bi bi-clipboard-heart"></i> Fazer o Bem</a></li>
+        <li><a href="/"><i class="bi bi-house"></i> Home</a></li>
+        <li><a href="/jobs/board"><i class="bi bi-clipboard-heart"></i> Fazer o Bem</a></li>
         <li><a href="/notifications"><i class="bi bi-bell"></i> Notificações</a></li>
         <li><a href="/profile"><i class="bi bi-person-circle"></i> Perfil</a></li>
-        <li><a href="/logout"><i class="bi bi-search"></i> Sair</a></li>
+        <li><a href="/logout"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
     {{else if session.ngoid}}
         <!-- Menu para ONG autenticada -->
-        <li><a href="/home"><i class="bi bi-house"></i> Home</a></li>
-        <li><a href="/board"><i class="bi bi-clipboard-heart"></i> Meus Trabalhos</a></li>
+        <li><a href="/"><i class="bi bi-house"></i> Home</a></li>
+        <li><a href="/jobs/myjobs"><i class="bi bi-clipboard-heart"></i> Meus Trabalhos</a></li>
         <li><a href="/notifications"><i class="bi bi-bell"></i> Notificações</a></li>
         <li><a href="/profile"><i class="bi bi-person-circle"></i> Perfil</a></li>
-        <li><a href="/logout"><i class="bi bi-search"></i> Sair</a></li>
+        <li><a href="/logout"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
     {{else}}
         <!-- Menu para visitantes -->
-        <li><a href="/login"><i class="bi bi-search"></i> Entrar</a></li>
-        <li><a href="/register"><i class="bi bi-search"></i> Cadastrar-se</a></li>
-        <li><a href="/registerngo"><i class="bi bi-search"></i> Cadastrar ONG</a></li>
+        <li><a href="/login"><i class="bi bi-box-arrow-in-left"></i> Login</a></li>
+        <li><a href="/register"><i class="bi bi-person"></i> Cadastrar-se</a></li>
+        <li><a href="/registerngo"><i class="bi bi-house-heart"></i> Cadastrar ONG</a></li>
     {{/if}}
             </ul>
         </nav>
@@ -59,9 +59,10 @@
         </div>
     {{/if}}
     {{{body}}}
+    </div>
 
-    <div class="container" id="footer">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="row" id="footer">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center border-top">
             <p class="col-md-4 mb-0 text-muted">© 2024 Aura Social App</p>
 
             <ul class="nav col-md-4 justify-content-end">
@@ -72,5 +73,6 @@
             </ul>
         </footer>
     </div>
+
 </body>
 </html>

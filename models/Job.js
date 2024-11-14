@@ -1,6 +1,5 @@
 import { Sequelize, DataTypes } from 'sequelize';
 import sequelize from '../db/conn.js';
-import Ngo from './Ngo.js';
 
 const Job = sequelize.define('Job', {
     id: {
@@ -11,10 +10,6 @@ const Job = sequelize.define('Job', {
     },
     ngoid: { 
         type: DataTypes.INTEGER,
-        references: {
-            model: Ngo,
-            key: 'id'
-        },
         allowNull: false,
     },
     title: {
@@ -27,7 +22,7 @@ const Job = sequelize.define('Job', {
     },
     addressstreet: {
         type: DataTypes.STRING(255),
-        allowNull: false,
+        allowNull: true,
     },
     addressnumber: {
         type: DataTypes.INTEGER,
@@ -57,8 +52,5 @@ const Job = sequelize.define('Job', {
     tableName: 'Job',
     timestamps: true,
 });
-
-Job.belongsTo(Ngo, { foreignKey: 'ngoid' });
-Ngo.hasMany(Job, { foreignKey: 'ngoid' });
 
 export default Job;

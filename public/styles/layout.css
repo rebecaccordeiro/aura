@@ -44,7 +44,9 @@ nav ul a {
 }
 
 #footer {
-    margin-top: 50px;
+    margin: 0;
+    padding: 2rem 2rem 1rem 2rem;
+    bottom: 0;
 }
 
 .logo {
@@ -164,4 +166,12 @@ a:hover {
 
 .comment-button {
     margin-top: 10px;
+}
+
+#addressFields {
+    margin-top: 0px;
+}
+
+.checkRemote {
+    margin-bottom: 0px;
 }

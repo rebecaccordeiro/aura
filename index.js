@@ -12,6 +12,7 @@ import os from "os";
 import flash from "express-flash";
 
 // Models
+import './models/index.js';
 import User from './models/User.js';
 import Ngo from './models/Ngo.js';
 import Job from './models/Job.js';
@@ -90,60 +91,28 @@ const forceSyncDatabase = async () => {
       console.error("Erro ao sincronizar o banco de dados:", error);
     }
   };
-
-app.get('/', (req, res) => {
-    res.render('home'); // substitua 'home' pelo nome da sua página inicial
-});
   
   // Inicializa a sincronização forçada
 //   forceSyncDatabase();
 
-// function passwordCheck(req, res, next) {
-//     const passwordTest = req.body["passwordInput"];
-//     if (passwordTest === "SENHA") {
-//         userIsValid = true;
-//     }
-//     next();
-// }
-// app.use(passwordCheck);
 
-// app.get("/", (req, res) => {
-//     res.render("login.ejs");
-// });
+// Middleware de autenticação
+function checkAuth(req, res, next) {
+    if (req.session.userid || req.session.ngoid) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
 
-// app.post("/login", (req, res) => {
-//     console.log(req.body);
-//     if(userIsValid) {
-//         res.render("index.ejs");
-//     } else {
-//         res.render("login.ejs");
-//     }
-// });
+app.get('/home', checkAuth, (req, res) => {
+    res.render('home');
+});
 
-// app.get("/register", (req, res) => {
-//     res.render("register.ejs");
-// })
-
-// app.post("/register", (req, res) => {
-//     console.log(req.body);
-// })
-
-// app.get("/board", (req, res) => {
-//     res.render("board.ejs");
-// });
-
-// app.get("/home", (req, res) => {
-//     res.render("index.ejs");
-// });
-
-// app.get("/notifications", (resq, res) => {
-//     res.render("notifications.ejs");
-// });
-
-// app.get("/profile", (resq, res) => {
-//     res.render("profile.ejs");
-// });
-
-// app.get("/configurations", (resq, res) => {
-//     res.render("configurations.ejs");
-// });
+app.get('/', (req, res) => {
+    if (req.session.userid || req.session.ngoid) {
+        res.redirect('/home');
+    } else {
+        res.redirect('/login');
+    }
+});
