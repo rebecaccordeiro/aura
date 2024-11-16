@@ -92,70 +92,27 @@
                 
                   <!--JOBS-->
                   <div class="jobs">
-                  <h1>Meus Trabalhos Voluntários</h1>
+                    <h1>Meus Trabalhos Voluntários</h1>
 
-                  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-                    <div class="col">
-                        <div class="card">
-                    <img src="../images/job-img-example.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Título do Trabalho</h5>
-                      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
-                      <a href="#" class="btn btn-secondary">Ver mais</a>
-                    </div>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                        <!--job-->
+                        {{#each jobs}}
+                        <div class="col">
+                            <div class="card">
+                                <img src="../images/job-img-example.jpeg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{this.title}}</h5>
+                                    <p class="card-text">{{this.description}}</p>
+                                    <a href="#" class="btn btn-secondary">Ver mais</a>
+                                </div>
+                            </div>
                         </div>
-                  </div>
-
-                  <div class="col">
-                  <div class="card">
-                    <img src="../images/job-img-example.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Título do Trabalho</h5>
-                      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
-                      <a href="#" class="btn btn-secondary">Ver mais</a>
+                        {{/each}}
+                        <!--end of job-->
                     </div>
                   </div>
-                  </div>
-
-
-                  <div class="col">
-                    <div class="card">
-                      <img src="../images/job-img-example.jpeg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Título do Trabalho</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
-                        <a href="#" class="btn btn-secondary">Ver mais</a>
-                      </div>
-                    </div>
-                  </div>
-
-
-                    <div class="col">
-                    <div class="card">
-                      <img src="images/job-img-example.jpeg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Título do Trabalho</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
-                        <a href="#" class="btn btn-secondary">Ver mais</a>
-                      </div>
-                    </div>
-                    </div>
-
-
-                    <div class="col">
-                      <div class="card">
-                        <img src="images/job-img-example.jpeg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Título do Trabalho</h5>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
-                          <a href="#" class="btn btn-secondary">Ver mais</a>
-                        </div>
-                      </div>
-                    </div>
-
-            </div>
-
-            <script>
+</div>
+<script>
     function toggleAddressFields() {
     const isRemote = document.getElementById('remoteWork').checked;
     const addressFields = document.getElementById('addressFields');

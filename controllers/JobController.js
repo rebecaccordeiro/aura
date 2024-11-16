@@ -26,7 +26,7 @@ export default class JobController {
 
         console.log(jobs)
         
-        res.render('jobs/myjobs')
+        res.render('jobs/myjobs', { jobs })
     }
 
     static async publishJob(req, res) {
