@@ -1,0 +1,85 @@
+<div class="board">
+<h1>Edite seu Trabalho Voluntário</h1>
+
+<form class="row g-3" action="/jobs/edit/{{job.id}}" method="POST">
+    <!-- Campo oculto para ID -->
+    <input type="hidden" name="id" value="{{job.id}}">
+
+    <!-- Campo Título -->
+    <div>
+        <label for="title" class="form-label">Título</label>
+        <input type="text" class="form-control" id="title" name="title" value="{{job.title}}" required>
+    </div>
+
+    <!-- Campo Descrição -->
+    <div>
+        <label for="description" class="form-label">Descrição</label>
+        <textarea class="form-control" id="description" name="description" rows="5" required>{{job.description}}</textarea>
+    </div>
+
+    <!-- Campo Vagas -->
+    <div>
+        <label for="vacancies" class="form-label">Quantidade de Vagas</label>
+        <input type="number" class="form-control" id="vacancies" name="vacancies" value="{{job.vacancies}}" required>
+    </div>
+
+    <!-- Checkbox Trabalho Remoto -->
+    <div>
+        <input class="form-check-input" type="checkbox" id="remote" name="remote" onclick="toggleAddressFields()" {{#if job.remote}}checked{{/if}}>
+        <label class="form-check-label" for="remote">Trabalho Remoto</label>
+    </div>
+
+    <!-- Campos de Endereço -->
+    <div id="addressFields" class="row g-3 {{#if job.remote}}d-none{{/if}}">
+        <div class="col-6">
+            <label for="addressstreet" class="form-label">Rua/Avenida</label>
+            <input type="text" class="form-control" id="addressstreet" name="addressstreet" value="{{job.addressstreet}}">
+        </div>
+        <div class="col-3">
+            <label for="addressnumber" class="form-label">Número</label>
+            <input type="text" class="form-control" id="addressnumber" name="addressnumber" value="{{job.addressnumber}}">
+        </div>
+        <div class="col-3">
+            <label for="addresscomplement" class="form-label">Complemento</label>
+            <input type="text" class="form-control" id="addresscomplement" name="addresscomplement" value="{{job.addresscomplement}}">
+        </div>
+        <div class="col-md-4">
+            <label for="city" class="form-label">Cidade</label>
+            <input type="text" class="form-control" id="city" name="city" value="{{job.city}}">
+        </div>
+        <div class="col-md-4">
+            <label for="state" class="form-label">Estado</label>
+            <select id="state" name="state" class="form-control">
+                <option value="" disabled>Escolha um estado</option>
+                {{#each states}}
+                <option value="{{this}}" {{#ifCond job.state this}}selected{{/ifCond}}>{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="zipcode" class="form-label">CEP</label>
+            <input type="text" class="form-control" id="zipcode" name="zipcode" value="{{job.zipcode}}">
+        </div>
+    </div>
+    <!-- photo upload -->
+    <div class="mb-3 d-flex align-items-center">
+        <label for="postFile" class="btn btn-outline-secondary btn-icon me-2 mb-0">
+            <i class="bi bi-paperclip"></i>
+            <input type="file" id="postFile" name="postFile" class="d-none">
+        </label>
+        <button type="submit" class="btn btn-secondary">Salvar Alterações</button>
+    </div>
+</form>
+</div>
+<script>
+    function toggleAddressFields() {
+    const addressFields = document.getElementById('addressFields');
+    const remote = document.getElementById('remote');
+
+    if (remote.checked) {
+        addressFields.classList.add('d-none');
+    } else {
+        addressFields.classList.remove('d-none');
+    }
+}
+</script>

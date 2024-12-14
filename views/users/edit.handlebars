@@ -1,0 +1,125 @@
+<div class="board">
+    <div class="container login-form col-lg-8">
+        <form action="/users/edit/{{user.id}}" method="POST">
+        {{!-- <div class="logo">
+            <img class="mb-4" src="/images/aura-logo.png" alt="" width="150px">
+        </div> --}}
+            <h1 class="h3 fw-normal">Editar cadastro</h1>
+            <div class="form-row">
+                <div class="form-group">
+              <label for="fname">Nome</label>
+              <input type="text" class="form-control" name="fname" value="{{user.fname}}" required>
+            </div>
+            <br/>
+            <div class="form-group">
+              <label for="lname">Sobrenome</label>
+              <input type="text" class="form-control" name="lname" value="{{user.lname}}" required>
+            </div>
+            <br/>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" value="{{user.email}}" required>
+              </div>
+              {{!-- <br/> --}}
+              {{!-- <div class="form-group">
+                <label for="password">Senha</label>
+                <input type="password" class="form-control" name="password" placeholder="*****" required>
+              </div>
+              <br/>
+              <div class="form-group">
+                <label for="confirmpassword">Confirme sua Senha</label>
+                <input type="password" class="form-control" name="confirmpassword" placeholder="*****" required>
+              </div> --}}
+            </div>
+            <br/>
+            {{!-- <div class="form-group">
+              <label for="address">Endereço</label>
+              <input type="text" class="form-control" name="address" placeholder="Rua/Avenida e número" required>
+            </div>
+            <br/>
+            <div class="form-group">
+              <label for="address2">Complemento</label>
+              <input type="text" class="form-control" name="address2" placeholder="Apartamento, bloco" required>
+            </div>
+            <br/> --}}
+            <div class="form-row">
+              <div class="form-group">
+                <label for="city">Cidade</label>
+                <input type="text" class="form-control" name="city" value="{{user.city}}" required>
+              </div>
+              <br/>
+              <div class="form-group">
+                <label for="state">Estado</label>
+                <select name="state" class="form-control" required>
+                  <option value="{{user.state}}" selected>{{user.state}}</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select>
+              </div>
+              <br/>
+              <div class="form-group">
+                <label for="birthday">Aniversário</label>
+                <input type="text" class="form-control" name="birthday" value="{{user.birthday}}" required>
+              </div>
+              <br/>
+              <div class="form-group">
+                <label for="phonenumber">Número de telefone</label>
+                <input type="text" class="form-control" name="phonenumber" value="{{user.phonenumber}}" required>
+              </div>
+              <br/>
+            </div>
+            {{!-- <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck" required>
+                <label class="form-check-label" for="gridCheck">
+                  Receber atualizações via e-mail.
+                </label>
+              </div>
+            </div>
+            <br> --}}
+            <div class="form-group">
+            <center><button type="submit" class="btn btn-secondary">Editar cadastro</button></center>
+            </div>
+          </form>
+          <form action="/users/delete" method="POST" class="d-inline" onsubmit="return confirmDelete(event)">
+                    <input type="hidden" name="id" value="{{this.id}}">
+                    <button type="submit" class="btn btn-danger">Excluir usuário</button>
+          </form>
+    </div>
+</div>
+
+<script>
+    function confirmDelete(event) {
+    const confirmation = confirm("Tem certeza de que deseja excluir seu usuário?");
+    if (!confirmation) {
+        event.preventDefault();
+        return false;
+    }
+    return true;
+    }
+</script>

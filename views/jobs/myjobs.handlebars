@@ -43,7 +43,7 @@
                         <div class="col-md-4">
                             <label for="state" class="visually-hidden">Estado</label>
                             <select name="state" class="form-control">
-                            <option selected>Estado</option>
+                            <option value="" selected>Estado</option>
                                 <option value="AC">Acre</option>
                                 <option value="AL">Alagoas</option>
                                 <option value="AP">Amapá</option>
@@ -79,7 +79,7 @@
                         </div>
                     </div>
 
-                    <!-- send file -->
+                    <!-- photo upload -->
                     <div class="mb-3 d-flex align-items-center">
                         <label for="postFile" class="btn btn-outline-secondary btn-icon me-2 mb-0">
                             <i class="bi bi-paperclip"></i>
@@ -99,7 +99,22 @@
                         {{#each jobs}}
                         <div class="col">
                             <div class="card">
-                                <img src="../images/job-img-example.jpeg" class="card-img-top" alt="...">
+                                <div class="position-relative">
+                                    <img src="../images/job-img-example.jpeg" class="card-img-top" alt="...">
+                                    <div class="btn-group position-absolute bottom-0 end-0 m-2">
+
+                                        <form action="/jobs/edit/{{this.id}}" method="GET" class="d-inline">
+                                            <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
+                                        </form>
+                                        {{!-- <a href="/jobs/edit/{{this.id}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a> --}}
+
+                                        <form action="/jobs/delete" method="POST" class="d-inline" onsubmit="return confirmDelete(event)">
+                                            <input type="hidden" name="id" value="{{this.id}}">
+                                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
+                                        </form>
+
+                                    </div>
+                                </div>
                                 <div class="card-body">
                                     <h5 class="card-title">{{this.title}}</h5>
                                     <p class="card-text">{{this.description}}</p>
@@ -123,4 +138,13 @@
         addressFields.style.display = 'flex';
     }
     }
+
+    function confirmDelete(event) {
+    const confirmation = confirm("Tem certeza de que deseja excluir este trabalho?");
+    if (!confirmation) {
+        event.preventDefault();
+        return false;
+    }
+    return true;
+}
 </script>

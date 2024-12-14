@@ -32,6 +32,14 @@ const Job = sequelize.define('Job', {
         type: DataTypes.STRING(55),
         allowNull: true,
     },
+    city: {
+        type: DataTypes.STRING(55),
+        allowNull: true,
+    },
+    state: {
+        type: DataTypes.STRING(55),
+        allowNull: true,
+    },
     zipcode: {
         type: DataTypes.INTEGER,
         allowNull: true,

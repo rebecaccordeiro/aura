@@ -1,0 +1,38 @@
+<div class="profile">
+    <div class="div-profile-pic">
+        <img class="profile-pic" src="/images/profile-example.png" height="100px">
+    </div>
+    <div class="div-profile-text">
+        <div class="div-profile-name-grid">
+            <div class="div-profile-name-text">
+                <h1>{{userData.fname}} {{userData.lname}}</h1>  
+            </div>
+            <div>
+                <form action="/users/edit/{{userData.id}}" method="GET" class="d-inline">
+                    <button type="submit" class="btn btn-secondary btn-sm">Editar cadastro</button>
+                </form>
+            </div>
+        </div>
+        <h3>{{userData.city}}, {{userData.state}}</h3>
+        <p>{{userData.email}} | {{userData.phonenumber}}</p>
+    </div>
+
+    <div class="div-profile-jobs">
+        <hr>
+        <h2>
+            Trabalhos Feitos
+        </h2>
+        <ul>
+        {{!-- {{#each userData.jobs}}
+            <li>{{this.title}} - {{this.date}}</li>
+        {{/each}} --}}
+        </ul>
+    </div>
+
+    <div class="div-profile-stamps">
+        <hr>
+        <h2>
+            Selos Conquistados
+        </h2>
+    </div>
+</div>
