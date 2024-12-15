@@ -106,9 +106,10 @@
             <center><button type="submit" class="btn btn-secondary">Editar cadastro</button></center>
             </div>
           </form>
+          <br>
           <form action="/users/delete" method="POST" class="d-inline" onsubmit="return confirmDelete(event)">
                     <input type="hidden" name="id" value="{{this.id}}">
-                    <button type="submit" class="btn btn-danger">Excluir usuário</button>
+                    <center><button type="submit" class="btn btn-danger">Excluir usuário</button></center>
           </form>
     </div>
 </div>

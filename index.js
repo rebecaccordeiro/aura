@@ -40,7 +40,14 @@ sequelize.sync()
     })
     .catch(error => console.error('Erro ao sincronizar modelos:', error));
 
-app.engine('handlebars', exphbs());
+app.engine(
+    'handlebars',
+    exphbs({
+        helpers: {
+            eq: (a, b) => a === b,
+        },
+    })
+);
 app.set('view engine', 'handlebars');
 
 var userIsValid = false;

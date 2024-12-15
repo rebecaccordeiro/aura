@@ -1,4 +1,7 @@
 import User from '../models/User.js';
+import Ngo from '../models/Ngo.js';
+import Job from '../models/Job.js';
+import UserJob from '../models/UserJob.js';
 
 export default class UserController {
     static createUser(req, res) {
@@ -31,25 +34,42 @@ export default class UserController {
 
     static async userProfile(req, res) {
         const userId = req.session.userid
-        console.log(userId)
 
         const user = await User.findOne({
-            where: {
-                id: userId,
-            },
+            where: { id: userId },
+            attributes: ['id', 'fname', 'lname', 'city', 'state', 'email', 'phonenumber'],
             plain: true,
         })
 
-        // check if User exists
         if (!user) {
             res.redirect('/login')
         }
 
-        const userData = user.dataValues
+        const userData = user.toJSON();
 
-        console.log(userData)
-        
-        res.render('users/profile', { userData })
+        const userApplications = await UserJob.findAll({
+            where: { userid: userId },
+            attributes: ['jobid']
+        });
+
+        const appliedJobIds = userApplications.map(app => app.jobid);
+
+        const appliedJobs = await Job.findAll({
+            where: {
+                id: appliedJobIds
+            },
+            include: [
+                { model: Ngo, attributes: ['name'] }
+            ],
+            order: [['createdAt', 'DESC']]
+        });
+
+        const appliedJobsData = appliedJobs.map(job => job.toJSON());
+
+        res.render('users/profile', { userData, jobs: appliedJobsData });
+    } catch (error) {
+        console.error('Erro ao carregar o perfil do usuário:', error);
+        res.status(500).send('Erro ao carregar o perfil do usuário.');
     }
 
     static async updateUser(req, res) {

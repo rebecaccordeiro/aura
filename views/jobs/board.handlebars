@@ -1,5 +1,5 @@
 <div class="board">
-                <h1>Encontre um Trabalho Voluntário</h1>
+                {{!-- <h1>Encontre um Trabalho Voluntário</h1>
                   
                   <div class="btn-group">
                     <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -35,70 +35,42 @@
                       <li><a class="dropdown-item" href="#">Menu item</a></li>
                       <li><a class="dropdown-item" href="#">Menu item</a></li>
                     </ul>
-                  </div>
-
-
+                  </div> --}}
+                  
                   <!--JOBS-->
                   <div class="jobs">
-                  <h1>Mural de Trabalhos Voluntários</h1>
+                    <h1>Mural de Trabalhos Voluntários</h1>
 
-                  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-                    <div class="col">
-                        <div class="card">
-                    <img src="images/job-img-example.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Título do Trabalho</h5>
-                      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
-                      <a href="#" class="btn btn-secondary">Ver mais</a>
-                    </div>
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                        <!--job-->
+                        {{#each jobs}}
+                        <div class="col">
+                            <div class="card">
+                                <div class="position-relative">
+                                    <img src="../images/job-img-example.jpeg" class="card-img-top" alt="...">
+                                    {{#if remote}}
+                                    <div class="btn-group position-absolute top-0 end-0 m-2">
+                                            <button class="btn btn-sm btn-danger">REMOTO</button>
+                                        {{!-- <a href="/jobs/edit/{{this.id}}" class="btn btn-primary"><i class="bi bi-pencil-square"></i></a> --}}
+                                    </div>
+                                    {{/if}}
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{title}}</h5>
+                                    <p class="card-text">{{description}}</p>
+                                    {{#if remote}}{{else}}<p><strong>Local:</strong> {{city}}, {{state}}{{/if}}</p>
+                                    <p><strong>Publicado por:</strong> {{Ngo.name}}</p>
+                                    <a href="/jobs/details/{{id}}" class="btn btn-secondary">Ver mais</a>
+                                    <form action="/jobs/{{#if isApplied}}unapply{{else}}apply{{/if}}/{{id}}" method="POST" class="d-inline">
+                                        <input type="hidden" name="jobid" value="{{id}}">
+                                        <button type="submit" class="btn {{#if isApplied}}btn-danger{{else}}btn-success{{/if}}" {{#if (eq vacancies 0)}}disabled{{/if}}> {{#if isApplied}}Descandidatar-se{{else}}Candidatar-se{{/if}}
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </div>
                         </div>
-                  </div>
-
-                  <div class="col">
-                  <div class="card">
-                    <img src="images/job-img-example.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Título do Trabalho</h5>
-                      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
-                      <a href="#" class="btn btn-secondary">Ver mais</a>
-                    </div>
-                  </div>
-                  </div>
-
-
-                  <div class="col">
-                    <div class="card">
-                      <img src="images/job-img-example.jpeg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Título do Trabalho</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
-                        <a href="#" class="btn btn-secondary">Ver mais</a>
-                      </div>
-                    </div>
-                  </div>
-
-
-                    <div class="col">
-                    <div class="card">
-                      <img src="images/job-img-example.jpeg" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">Título do Trabalho</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
-                        <a href="#" class="btn btn-secondary">Ver mais</a>
-                      </div>
-                    </div>
-                    </div>
-
-
-                    <div class="col">
-                      <div class="card">
-                        <img src="images/job-img-example.jpeg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Título do Trabalho</h5>
-                          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique sapien pharetra neque euismod, non tristique dolor tristique.</p>
-                          <a href="#" class="btn btn-secondary">Ver mais</a>
-                        </div>
-                      </div>
-                    </div>
-
+                        {{/each}}
+                        <!--end of job-->
             </div>
+</div>

@@ -54,7 +54,7 @@ const Job = sequelize.define('Job', {
     },
     active: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        defaultValue: true,
     },
 }, {
     tableName: 'Job',

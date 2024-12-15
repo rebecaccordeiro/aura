@@ -1,9 +1,44 @@
 import Job from '../models/Job.js';
 import Ngo from '../models/Ngo.js';
+import User from '../models/User.js';
+import UserJob from '../models/UserJob.js';
 
 export default class JobController {
     static async board(req, res) {
-        res.render('jobs/board')
+        const userId = req.session.userid;
+
+        try {
+            const jobs = await Job.findAll({
+                where: { active: true },
+                include: [
+                    { model: Ngo, attributes: ['name'] }
+                ],
+                order: [['createdAt', 'DESC']]
+            });
+    
+            let appliedJobs = [];
+
+        if (userId) {
+            const userApplications = await UserJob.findAll({
+                where: { userid: userId },
+                attributes: ['jobid']
+            });
+            appliedJobs = userApplications.map(app => app.jobid);
+        }
+
+        const jobsData = jobs.map((job) => {
+            const jobJson = job.toJSON();
+            return {
+                ...jobJson,
+                isApplied: appliedJobs.includes(jobJson.id)
+            };
+        });
+
+        res.render('jobs/board', { jobs: jobsData });
+        } catch (error) {
+            console.error('Erro ao carregar o mural de jobs:', error);
+            res.status(500).send('Erro ao carregar o mural de trabalhos voluntários.');
+        }
     }
 
     static async myJobs(req, res) {
@@ -138,4 +173,86 @@ export default class JobController {
             console.log('O trabalho voluntário não pôde ser excluído.' + err);
         }
     }
+
+    static async applyToJob(req, res) {
+        const jobId = req.body.jobid;
+        const userId = req.session.userid;
+
+        try {
+            const job = await Job.findOne({ where: { id: jobId } });
+
+            if (!job) {
+                req.flash('message', 'Trabalho voluntário não encontrado.');
+                return res.redirect('/jobs/board');
+            }
+
+            if (job.vacancies <= 0 || !job.active) {
+                req.flash('message', 'Não há mais vagas disponíveis para este trabalho.');
+                return res.redirect('/jobs/board');
+            }
+
+            const existingApplication = await UserJob.findOne({
+                where: {
+                    userid: userId,
+                    jobid: jobId,
+                },
+            });
+
+            if (existingApplication) {
+                req.flash('message', 'Você já se candidatou a este trabalho!');
+                return res.redirect('/jobs/board');
+            }
+
+            await UserJob.create({
+                userid: userId,
+                jobid: jobId,
+            });
+
+            job.vacancies -= 1;
+            if (job.vacancies === 0) {
+                job.active = false;
+            }
+            await job.save();
+
+            req.flash('message', 'Você se candidatou com sucesso!');
+            res.redirect('/jobs/board');
+        } catch (error) {
+            console.error('Erro ao se candidatar ao trabalho:', error);
+            req.flash('message', 'Ocorreu um erro ao processar sua candidatura.');
+            res.redirect('/jobs/board');
+        }
+    }
+
+    static async unapplyToJob(req, res) {
+        const jobId = req.body.jobid;
+        const userId = req.session.userid;
+    
+        try {
+            const application = await UserJob.findOne({
+                where: { userid: userId, jobid: jobId },
+            });
+    
+            if (!application) {
+                req.flash('message', 'Você não está cadastrado neste trabalho.');
+                return res.redirect('/jobs/board');
+            }
+    
+            await application.destroy();
+    
+            const job = await Job.findOne({ where: { id: jobId } });
+            if (job) {
+                job.vacancies += 1;
+                job.active = true;
+                await job.save();
+            }
+    
+            req.flash('message', 'Você retirou sua candidatura com sucesso.');
+            res.redirect('/jobs/board');
+        } catch (error) {
+            console.error('Erro ao retirar candidatura:', error);
+            req.flash('message', 'Ocorreu um erro ao processar sua solicitação.');
+            res.redirect('/jobs/board');
+        }
+    }    
+    
 };
