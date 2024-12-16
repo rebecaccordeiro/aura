@@ -22,7 +22,6 @@ export default class UserController {
                 req.flash('message', 'Usuário não encontrado.');
             }
     
-            // converts user to json
             const userData = user.toJSON();
     
             res.render('users/edit', { user: userData });
@@ -67,9 +66,9 @@ export default class UserController {
         const appliedJobsData = appliedJobs.map(job => job.toJSON());
 
         res.render('users/profile', { userData, jobs: appliedJobsData });
-    } catch (error) {
-        console.error('Erro ao carregar o perfil do usuário:', error);
-        res.status(500).send('Erro ao carregar o perfil do usuário.');
+        // } catch (error) {
+        //     console.error('Erro ao carregar o perfil do usuário:', error);
+        //     res.status(500).send('Erro ao carregar o perfil do usuário.');
     }
 
     static async updateUser(req, res) {

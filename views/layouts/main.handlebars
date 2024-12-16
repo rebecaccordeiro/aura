@@ -26,15 +26,15 @@
         <!-- Menu para usuário autenticado -->
         <li><a href="/"><i class="bi bi-house"></i> Home</a></li>
         <li><a href="/jobs/board"><i class="bi bi-clipboard-heart"></i> Fazer o Bem</a></li>
-        <li><a href="/notifications"><i class="bi bi-bell"></i> Notificações</a></li>
+        {{!-- <li><a href="/notifications"><i class="bi bi-bell"></i> Notificações</a></li> --}}
         <li><a href="/users/profile"><i class="bi bi-person-circle"></i> Perfil</a></li>
         <li><a href="/logout"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
     {{else if session.ngoid}}
         <!-- Menu para ONG autenticada -->
         <li><a href="/"><i class="bi bi-house"></i> Home</a></li>
         <li><a href="/jobs/myjobs"><i class="bi bi-clipboard-heart"></i> Meus Trabalhos</a></li>
-        <li><a href="/notifications"><i class="bi bi-bell"></i> Notificações</a></li>
-        <li><a href="/ngos/profile"><i class="bi bi-person-circle"></i> Perfil</a></li>
+        {{!-- <li><a href="/notifications"><i class="bi bi-bell"></i> Notificações</a></li> --}}
+        <li><a href="/ngos/page"><i class="bi bi-person-circle"></i> Perfil</a></li>
         <li><a href="/logout"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
     {{else}}
         <!-- Menu para visitantes -->

@@ -1,0 +1,59 @@
+<div class="profile">
+    <div class="div-profile-pic">
+        <img class="profile-pic" src="/images/profile-example.png" height="100px">
+    </div>
+    <div class="div-profile-text">
+        <div class="div-profile-name-grid">
+            <div class="div-profile-name-text">
+                <h1>{{ngoData.name}}</h1>  
+            </div>
+            <div>
+                <form action="/ngos/edit/{{ngoData.id}}" method="GET" class="d-inline">
+                    <button type="submit" class="btn btn-secondary btn-sm">Editar cadastro</button>
+                </form>
+            </div>
+        </div>
+        <h3>{{ngoData.city}}, {{ngoData.state}}</h3>
+        <p>{{ngoData.addressstreet}}, {{ngoData.addressnumber}} - {{ngoData.addresscomplement}}</p>
+        <p>{{ngoData.email}} | {{ngoData.phonenumber}}</p>
+    </div>
+
+    <div class="div-profile-jobs">
+        <hr>
+        <h2>
+            Trabalhos Ativos
+        </h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+            <!--job-->
+            {{#each jobs}}
+            <div class="col">
+                <div class="card">
+                    <div class="position-relative">
+                        <img src="../images/job-img-example.jpeg" class="card-img-top" alt="...">
+                        {{#if remote}}
+                        <div class="btn-group position-absolute top-0 end-0 m-2">
+                                <button class="btn btn-sm btn-danger">REMOTO</button>
+                        </div>
+                        {{/if}}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{title}}</h5>
+                        <p class="card-text">{{description}}</p>
+                        {{#if remote}}{{else}}<p><strong>Local:</strong> {{city}}, {{state}}{{/if}}</p>
+                        <p><strong>Publicado por:</strong> {{Ngo.name}}</p>
+                        <a href="/jobs/details/{{id}}" class="btn btn-secondary">Ver mais</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+            <!--end of job-->
+        </div>
+    </div>
+
+    {{!-- <div class="div-profile-stamps">
+        <hr>
+        <h2>
+            Selos Conquistados
+        </h2>
+    </div> --}}
+</div>

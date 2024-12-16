@@ -116,14 +116,12 @@ export default class AuthController {
 
         // password match validation
         if(password != confirmpassword) {
-            // message
             req.flash('message', 'As senhas não conferem, tente novamente.')
             res.render('auth/register')
 
             return
         }
 
-        // check if ngo exists
         const checkIfNgoExists = await Ngo.findOne({where: {email: email}})
 
         if(checkIfNgoExists) {
